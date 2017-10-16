@@ -24,7 +24,7 @@ import {
 
 // const {height, width} = Dimensions.get('window');
 // const pixelRatio = PixelRatio.get();
-let widthOfMargin = Dimensions.get('window').width * 0.5;
+// let widthOfMargin = Dimensions.get('window').width * 0.5;
 
 export default class App extends Component<{}> {
     constructor(props) {
@@ -63,7 +63,7 @@ export default class App extends Component<{}> {
                     您输入的手机号是：{this.state.inputedNum}
                 </Text>
                 <TextInput style={styles.textInputStyle} placeholder={'请输入密码'} secureTextEntry={true}
-                           onChangeText={(newText) => this.state.updatePW(newText)}/>
+                           onChangeText={(newText) => this.state.updatePW}/>
                 <Text style={styles.bigTextPrompt}>
                     确定
                 </Text>
