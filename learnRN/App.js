@@ -22,43 +22,75 @@ import {
 //     'Shake or press menu button for dev menu',
 // });
 
-// const {height, width} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 // const pixelRatio = PixelRatio.get();
 // let widthOfMargin = Dimensions.get('window').width * 0.5;
 
 export default class App extends Component<{}> {
     constructor(props) {
       super(props);
-      this.state = {
+
+      // 成员变量
+        this.myProperty1 = 'test';
+        this.mhProperty2 = 'test2';
+
+        // 状态机变量
+        this.state = {
           inputedNum: '',
           inputedPW: ''
       };
       this.updatePW = this.updatePW.bind(this);
     }
 
-
     updateNum(newText) {
+        // 改变状态机变量的值 调用该方法
         this.setState(() => {
             return {
                 inputedNum: newText,
             };
         });
+        // this.setState((oldState) => {
+        //         for (var aName in oldState) {
+        //
+        //             console.log(aName);
+        //             console.log(oldState[aName]);
+        //         }
+        //         return {
+        //             inputedNum: newText,
+        //             aBranderNewStateVarible: 'I am a new varable.'
+        //         };
+        //     }, this.changeNumDon
+        // );
     }
+    // changeNumDon() {
+    //     console.log('React Native has Changed inputed Num');
+    // }
 
-    updatePW(newText) {
+    /*// 判断是否渲染
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.inputedNum.length < 3) return false;
+        return true;
+    }*/
+
+    /*updatePW(newText) {
         this.setState(() => {
             return {
                 inputedPW: newText,
             };
         });
-    };
+    };*/
+
+    //终极简单写法
+    updatePW(inputedNum) {
+        this.setState({ inputedNum })
+    }
 
     render() {
         return (
             <View style={styles.container}>
 
                 <TextInput style={styles.textInputStyle} placeholder={'请输入手机号'}
-                           onChangeText={(newText) => this.updateNum(newText)}/>
+                           onChangeText={(inputedNum) => this.setState({inputedNum})}/>
                 <Text style={styles.textPromptStyle}>
                     您输入的手机号是：{this.state.inputedNum}
                 </Text>
@@ -85,7 +117,8 @@ const styles = StyleSheet.create({
         // width: 200,
         backgroundColor: 'gray',
         fontSize: 20,
-        height: 30,
+        height: 40,
+        width: width - 30
 
     },
     textPromptStyle: {
@@ -95,11 +128,14 @@ const styles = StyleSheet.create({
     },
     bigTextPrompt: {
         margin: 20,
-        backgroundColor: 'gray',
+        backgroundColor: 'green',
         color: 'white',
         textAlign: 'center',
         fontSize: 30,
-        // marginTop: 40
+        width: width - 30,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     welcome: {
