@@ -57,12 +57,26 @@ export default class LoginLeaf extends Component<{}> {
                 <TextInput style={styles.textFieldStyles} placeholder={'请输入密码'} secureTextEntry={true}
                            onChangeText={(newText) => this.updatePassword(newText)}/>
 
-                <Text style={styles.viewStyles}>
+                <Text style={styles.bigTextStyles}
+                      onPress={() => this.userPressConfirm()}>
                     确定
+                </Text>
+
+                <Text style={styles.bigTextStyles}
+                      onPress={() => this.userPressAndressBook()}>
+                    通讯录
                 </Text>
             </View>
         );
     }
+
+    userPressConfirm() {
+      this.props.onLoginPressed(this.state.inputedMobile, this.state.inputedPassword);
+    };
+
+    userPressAndressBook() {
+      // 空
+    };
 }
 
 const styles = StyleSheet.create({
@@ -96,15 +110,15 @@ const styles = StyleSheet.create({
         width: width - 30,
         // textColor: 'red'
     },
-    viewStyles: {
+    bigTextStyles: {
         backgroundColor: 'blue',
         marginTop: 40,
         width: width - 30,
         height: 50,
         textAlign: 'center',
         color: 'white',
-        fontSize: 30,
-        padding: 10
+        fontSize: 20,
+        padding: 15
     }
 });
-// AppRegistry.registerComponent('LoginLeaf', () => App);
+
