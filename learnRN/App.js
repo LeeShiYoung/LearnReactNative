@@ -27,6 +27,13 @@ const {width} = Dimensions.get('window');
 // let widthOfMargin = Dimensions.get('window').width * 0.5;
 
 export default class App extends Component<{}> {
+
+    // 静态函数 静态变量
+    static myStaticObject = 'init value';
+    static  myStaticMethod() {
+        console.log('MyStaticMethod is called');
+    }
+
     constructor(props) {
       super(props);
 
@@ -40,6 +47,7 @@ export default class App extends Component<{}> {
           inputedPW: ''
       };
       this.updatePW = this.updatePW.bind(this);
+        
     }
 
     updateNum(newText) {
@@ -86,11 +94,12 @@ export default class App extends Component<{}> {
     }
 
     render() {
+        console.log('this in render');
         return (
             <View style={styles.container}>
 
                 <TextInput style={styles.textInputStyle} placeholder={'请输入手机号'}
-                           onChangeText={(inputedNum) => this.setState({inputedNum})}/>
+                           onChangeText={(newText) => this.updateNum(newText)}/>
                 <Text style={styles.textPromptStyle}>
                     您输入的手机号是：{this.state.inputedNum}
                 </Text>
