@@ -11,20 +11,22 @@ import {
     Text,
     View,
     Dimensions,
-    TextInput
+    TextInput,
+    Alert
 } from 'react-native';
+import PropTypes from 'prop-types'
 
 const {width} = Dimensions.get('window');
 
 export default class LoginLeaf extends Component<{}> {
 
     constructor(props) {
-      super(props);
-      this.state = {
+        super(props);
+        this.state = {
 
-          inputedMobile:'',
-          inputedPassword:''
-      };
+            inputedMobile:'',
+            inputedPassword:''
+        };
     }
 
     updateMobile(newText) {
@@ -37,11 +39,11 @@ export default class LoginLeaf extends Component<{}> {
 
 
     updatePassword(newText) {
-      this.setState(() => {
-          return {
-            inputedPassword: newText
-          };
-      });
+        this.setState(() => {
+            return {
+                inputedPassword: newText
+            };
+        });
     };
     render() {
         return (
@@ -71,13 +73,32 @@ export default class LoginLeaf extends Component<{}> {
     }
 
     userPressConfirm() {
-      this.props.onLoginPressed(this.state.inputedMobile, this.state.inputedPassword);
+        console.log(this);
+        Alert.alert(
+            '提示',
+            '确认使用'+this.state.inputedMobile+'号码登录？',
+            [
+                {text: '取消', onPress: (() => {}), style: 'cancel'},
+                {text: '确定', onPress: this.jumpToWaiting}
+            ]
+        );
+    };
+
+    jumpToWaiting() {
+        console.log(this);
+        this.props.onLoginPressed(this.state.inputedMobile, this.state.inputedPassword);
     };
 
     userPressAndressBook() {
-      // 空
+        // 空
+
     };
+
 }
+
+LoginLeaf.propTypes = {
+    onLoginPressed: PropTypes.function
+};
 
 const styles = StyleSheet.create({
     container: {

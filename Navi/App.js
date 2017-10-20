@@ -6,9 +6,10 @@
 
 import React, { Component } from 'react';
 import {
-    Platform, BackAndroid
+    Platform, BackHandler
 } from 'react-native';
 import LoginLeaf from './LoginLeaf';
+import WaitingLeaf from './WaitingLeaf';
 
 export default class App extends Component<{}> {
 
@@ -33,8 +34,10 @@ export default class App extends Component<{}> {
 
     render() {
         if (this.state.currentScence === 'Login')
-            return <LoginLeaf onLoginPress={this.onLoginPressed}/>;
+
+            return <LoginLeaf onLoginPressed={this.onLoginPressed}/>;
         else return (
+
             <WaitingLeaf phoneNumber={this.state.phoneNum}
                          onGoBackPressed={this.handleBackSignal}
                          userPw={this.state.userPW}/>
@@ -51,11 +54,11 @@ export default class App extends Component<{}> {
 
     componentDidMount() {
         if (Platform.OS === "android")
-            BackAndroid.addEventListener('hardwareBackPress', this.handleBackSignal);
+            BackHandler.addEventListener('hardwareBackPress', this.handleBackSignal);
     }
 
     componentWillMount() {
         if (Platform.OS === "android")
-            BackAndroid.removeEventListener('hardwareBackPress', this.handleBackSignal);
+            BackHandler.removeEventListener('hardwareBackPress', this.handleBackSignal);
     }
 }
