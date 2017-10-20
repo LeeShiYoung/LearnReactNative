@@ -33,6 +33,8 @@ export default class App extends Component<{}> {
     }
 
     render() {
+        console.log(this);
+        console.log('111111111111');
         if (this.state.currentScence === 'Login')
 
             return <LoginLeaf onLoginPressed={this.onLoginPressed}/>;

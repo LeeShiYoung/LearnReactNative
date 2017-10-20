@@ -79,16 +79,20 @@ export default class LoginLeaf extends Component<{}> {
             '确认使用'+this.state.inputedMobile+'号码登录？',
             [
                 {text: '取消', onPress: (() => {}), style: 'cancel'},
-                {text: '确定', onPress: () => {this.props.onLoginPressed(this.state.inputedMobile, this.state.inputedPassword);}}
+                {text: '确定', onPress: () => this.props.onLoginPressed(this.state.inputedMobile, this.state.inputedPassword)}
             ]
         );
+    };
+
+    // this指向出问题 待解决
+    jumpToWaiting() {
+        this.props.onLoginPressed(this.state.inputedMobile, this.state.inputedPassword);
     };
 
     userPressAndressBook() {
         // 空
 
     };
-
 }
 
 LoginLeaf.propTypes = {
