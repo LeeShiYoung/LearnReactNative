@@ -90,7 +90,8 @@ export default class LoginLeaf extends Component<{}> {
     };
 
     userPressAndressBook() {
-        // 空
+        let exampleInterface = require('react-native').NativeModules.ExampleInterface;
+        exampleInterface.sendMessage('{\"msgType\":\"pickContact\"}');
 
     };
 }
