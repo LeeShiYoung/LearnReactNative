@@ -9,7 +9,8 @@ import {
     Platform,
     StyleSheet,
     Dimensions,
-    View
+    View,
+    Text
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -19,18 +20,61 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+
 const {width} = Dimensions.get('window');
 
 export default class App extends Component<{}> {
+
+    constructor(props) {
+        super(props);
+
+        this._onTouchMove = this._onTouchMove.bind(this);
+        this._onTouchStart = this._onTouchStart.bind(this);
+        this._onTouchEnd = this._onTouchEnd.bind(this);
+    }
+
+    _onTouchMove(event) {
+        console.log("touvh move: ");
+    }
+
+    _onTouchStart(event) {
+        console.log("touch start");
+    }
+
+    _onTouchEnd(event) {
+        console.log("touch end");
+    }
+
+    _onLayout(event) {
+        let {x, y, width, height} = event.nativeEvent.layout;
+        console.log('width from view onlayout' + width);
+        console.log('height from view onlayout' + height);
+        console.log('x from view onlayout' + x);
+        console.log('y from view onlayout' + y);
+
+        let dimensions = require('Dimensions');
+        let {width2, height2} = dimensions.get('window');
+        console.log('width from Dimensions' + width2);
+        console.log('height from Dimensions' + height2);
+        console.log('\r\n');
+    }
+
+
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.container}
+                  onTouchStart = {this._onTouchStart}
+                  onTouchMove = {this._onTouchMove}
+                  onTouchEnd = {this._onTouchEnd}
+                  onLayout={this._onLayout}>
 
-                <View style={styles.welcome} opacity={0.2}/>
-                <View style={styles.welcome} opacity={0.3}/>
-                <View style={styles.welcome} opacity={0.4}/>
-                <View style={styles.welcome} opacity={0.5}/>
-                <View style={styles.welcome} opacity={0.6}/>
+                {/*<View style={styles.welcome} opacity={0.2}/>*/}
+                {/*<View style={styles.welcome} opacity={0.3}/>*/}
+                {/*<View style={styles.welcome} opacity={0.4}/>*/}
+                {/*<View style={styles.welcome} opacity={0.5}/>*/}
+                {/*<View style={styles.welcome} opacity={0.6}/>*/}
+
+                <Text style={styles.textSty} >啦啦啦</Text>
             </View>
         );
     }
@@ -59,9 +103,9 @@ const styles = StyleSheet.create({
     },
 
     vs2: {
-      flex: 2,
-      height: 50,
-      backgroundColor: 'black'
+        flex: 2,
+        height: 50,
+        backgroundColor: 'black'
     },
 
     welcome: {
@@ -79,4 +123,13 @@ const styles = StyleSheet.create({
         color: '#333333',
         marginBottom: 5,
     },
+
+    textSty: {
+
+        textAlign: 'center',
+        fontSize: 20,
+        backgroundColor: 'red',
+        // width: 200,
+        // height: 100
+    }
 });
