@@ -31,10 +31,14 @@ export default class App extends Component<{}> {
         this._onTouchMove = this._onTouchMove.bind(this);
         this._onTouchStart = this._onTouchStart.bind(this);
         this._onTouchEnd = this._onTouchEnd.bind(this);
+
+        this.state = {bigButtonPointerEvents:null};
+        this.onBigButtonPressed = this.onBigButtonPressed.bind(this);
+        this.onSmallButtonPressed = this.onSmallButtonPressed.bind(this);
     }
 
     _onTouchMove(event) {
-        console.log("touvh move: ");
+        console.log("touch move: ");
     }
 
     _onTouchStart(event) {
@@ -60,13 +64,27 @@ export default class App extends Component<{}> {
     }
 
 
+    onBigButtonPressed() {
+        console.log('Big button pressed');
+    }
+
+    onSmallButtonPressed() {
+        if (this.state.bigButtonPointerEvents === null) {
+            console.log('big button will not response');
+            this.setState({bigButtonPointerEvents: 'none'});
+            return;
+        }
+        console.log('bi button will response');
+        this.setState({bigButtonPointerEvents:null});
+
+    }
     render() {
         return (
-            <View style={styles.container}
-                  onTouchStart = {this._onTouchStart}
-                  onTouchMove = {this._onTouchMove}
-                  onTouchEnd = {this._onTouchEnd}
-                  onLayout={this._onLayout}>
+            <View style={styles.container}>
+                  {/*onTouchStart = {this._onTouchStart}*/}
+                  {/*onTouchMove = {this._onTouchMove}*/}
+                  {/*onTouchEnd = {this._onTouchEnd}*/}
+                  {/*onLayout={this._onLayout}>*/}
 
                 {/*<View style={styles.welcome} opacity={0.2}/>*/}
                 {/*<View style={styles.welcome} opacity={0.3}/>*/}
@@ -74,7 +92,12 @@ export default class App extends Component<{}> {
                 {/*<View style={styles.welcome} opacity={0.5}/>*/}
                 {/*<View style={styles.welcome} opacity={0.6}/>*/}
 
-                <Text style={styles.textSty} >啦啦啦</Text>
+                <Text style={styles.textSty}
+                      onPress={this.onSmallButtonPressed}>上</Text>
+
+                <Text style={styles.textSty}
+                      onPress={this.onBigButtonPressed}
+                      pointerEvents={this.state.bigButtonPointerEvents}>下</Text>
             </View>
         );
     }
@@ -83,7 +106,7 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'space-around',
+        // justifyContent: 'space-around',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
         // position: 'relative'
@@ -129,7 +152,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
         backgroundColor: 'red',
-        // width: 200,
-        // height: 100
+        padding: 40,
+        width: 200,
+        height: 100,
+        marginTop: 50
     }
 });
