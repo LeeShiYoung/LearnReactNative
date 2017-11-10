@@ -1,0 +1,3 @@
+rootProject.name = 'LearnES6'
+
+include ':app'
